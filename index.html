@@ -103,13 +103,14 @@ function renderApp(){
         const parts=ex.split(/\s+[—–-]\s+/,2);
         const exName=parts[0];
         const exPrescription=parts.length>1?parts[1]:"";
-        sectionsHTML+=`<label class="exercise-item" for="${exId}" data-ex="${safeEx}"><input type="checkbox" id="${exId}" onchange="onExerciseToggle(${dayData.day})"><span class="exercise-label"><span class="exercise-name">${exName}</span>${exPrescription?`<span class="exercise-prescription">${exPrescription}</span>`:""}</span></label>`;
+        const hasLocalImage=!!movementImages[ex];
+        sectionsHTML+=`<label class="exercise-item" for="${exId}" data-ex="${safeEx}"><input type="checkbox" id="${exId}" onchange="onExerciseToggle(${dayData.day})"><span class="exercise-label"><span class="exercise-name">${exName}</span>${exPrescription?`<span class="exercise-prescription">${exPrescription}</span>`:""}</span>${hasLocalImage?"":`<button type="button" class="movement-button" aria-label="View ${exName}" onclick="openMovement(event, this.closest('.exercise-item').dataset.ex)">VIEW</button>`}</label>`;
       });
     });
     const noteHTML=dayData.note?`<div class="day-note">${dayData.note}</div>`:'';
     dayEl.innerHTML=`<div class="day-header"><div class="day-title-container" onclick="toggleDay(${dayData.day})"><input type="checkbox" id="day-cb-${dayData.day}" onchange="toggleDayAll(event,${dayData.day})" onclick="event.stopPropagation()"><span class="day-title">${dayData.title}</span></div><div class="day-meta" onclick="toggleDay(${dayData.day})"><span class="day-counter" id="counter-day-${dayData.day}">0/${dayTotal}</span><span class="arrow">▼</span></div></div><div class="day-description">${dayData.description}</div><div class="day-content">${sectionsHTML}${noteHTML}</div>`;
     container.appendChild(dayEl);
-    dayEl.querySelectorAll(".exercise-item").forEach(item=>item.addEventListener("click", function(event){ if(event.target.tagName === "INPUT") return; openMovement(event, this.dataset.ex); }));
+    dayEl.querySelectorAll(".exercise-item").forEach(item=>item.addEventListener("click", function(event){ if(event.target.tagName === "INPUT" || event.target.tagName === "BUTTON") return; if(movementImages[this.dataset.ex]) openMovement(event, this.dataset.ex); }));
   });
   loadSavedState(); updateProgress();
 }
@@ -142,10 +143,13 @@ const movementImages = {
   "90/90 hip switches — 10 total":"assets/90-90-hip-switches.jpg",
   "World’s greatest stretch — 5 per side":"assets/worlds-greatest-stretch.jpg"
 };
+function googleImagesUrl(ex){
+  return "https://www.google.com/search?tbm=isch&q="+encodeURIComponent(ex.replace(/—.*$/,"")+" exercise demonstration");
+}
 function imageVisual(ex){
   const src=movementImages[ex];
   if(src) return '<img src="'+src+'" alt="'+ex.replace(/"/g,"&quot;")+'" loading="lazy" style="width:100%;height:auto;max-height:520px;object-fit:contain;display:block;background:#fff">';
-  return '<div class="google-image-panel"><div class="google-image-heading">Exercise image coming soon</div><div class="google-image-text">Send an image for <strong>'+ex.replace(/"/g,"&quot;")+'</strong> and it can be added here.</div></div>';
+  return '<div class="google-image-panel"><div class="google-image-heading">View exercise examples</div><div class="google-image-text">Open Google Images for <strong>'+ex.replace(/"/g,"&quot;")+'</strong>.</div><a class="google-image-button" href="'+googleImagesUrl(ex)+'" target="_blank" rel="noopener noreferrer">OPEN GOOGLE IMAGES →</a></div>';
 }
 function openMovement(event,ex){
   if(event) event.stopPropagation();
