@@ -46,7 +46,7 @@
     .exercise-label { font-size: .9rem; color: var(--text-main); flex-grow: 1; line-height: 1.3; }
     .exercise-item:has(input[type="checkbox"]:checked) { background: var(--active-item-bg); }
     .exercise-item input[type="checkbox"]:checked + .exercise-label { color: var(--text-main); font-weight: 500; }
-    .exercise-item { cursor: pointer; } .movement-icon { margin-left:8px;color:var(--accent-blue);font-size:.75rem;opacity:.8; } .movement-button { margin-left:10px; border:1px solid var(--accent-blue); background:transparent; color:var(--accent-blue); border-radius:7px; padding:6px 9px; font-size:.72rem; font-weight:700; cursor:pointer; flex-shrink:0; touch-action:manipulation; } .movement-button:active { background:var(--accent-blue); color:#0f172a; } .movement-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)} .movement-modal.open{display:flex}.movement-card{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45)} .movement-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 10px}.movement-title{font-size:1.05rem;font-weight:700;line-height:1.25}.movement-close{border:1px solid var(--card-border);background:transparent;color:var(--text-main);width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}.movement-visual{margin:0 18px;min-height:250px;border-radius:12px;background:#0b1220;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;overflow:hidden}.movement-visual svg{width:100%;height:250px}.movement-details{padding:14px 18px 18px}.movement-details p{color:var(--text-muted);font-size:.88rem;line-height:1.45;margin-bottom:10px}.movement-tip{color:var(--text-main)!important}
+    .exercise-item { cursor: pointer; } .movement-icon { margin-left:8px;color:var(--accent-blue);font-size:.75rem;opacity:.8; } .movement-button { margin-left:10px; border:1px solid var(--accent-blue); background:transparent; color:var(--accent-blue); border-radius:7px; padding:6px 9px; font-size:.72rem; font-weight:700; cursor:pointer; flex-shrink:0; touch-action:manipulation; } .movement-button:active { background:var(--accent-blue); color:#0f172a; } .movement-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)} .movement-modal.open{display:flex}.movement-card{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45)} .movement-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 10px}.movement-title{font-size:1.05rem;font-weight:700;line-height:1.25}.movement-close{border:1px solid var(--card-border);background:transparent;color:var(--text-main);width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}.movement-visual{margin:0 18px;min-height:250px;border-radius:12px;background:#0b1220;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;overflow:hidden}.movement-visual img{width:100%;height:300px;object-fit:contain;display:block;background:#0b1220}.movement-source{display:block;margin-top:8px;font-size:.72rem;color:var(--text-muted);text-decoration:none}.movement-source:hover{color:var(--accent-blue)}.movement-details{padding:14px 18px 18px}.movement-details p{color:var(--text-muted);font-size:.88rem;line-height:1.45;margin-bottom:10px}.movement-tip{color:var(--text-main)!important}
     .day-note { padding: 12px 16px; font-size: .8rem; color: #f59e0b; background: #271e11; border-top: 1px solid var(--card-border); font-style: italic; line-height: 1.35; }
   </style>
 </head>
@@ -128,20 +128,62 @@ const movementInfo = {
   "Legs-up-the-wall — 2 min":["Lie on your back with your legs resting against a wall.","Let your breathing slow and keep the position comfortable."],
   "Diaphragmatic breathing — 2 min":["Breathe slowly into the lower ribs and abdomen.","Keep the shoulders relaxed and lengthen the exhale."],
 };
-function poseSVG(ex){
-  var t=ex.toLowerCase(), pose="stand";
-  if(t.indexOf("cat-cow")>=0) pose="cat"; else if(t.indexOf("plank")>=0||t.indexOf("push-up")>=0||t.indexOf("pushups")>=0) pose="plank"; else if(t.indexOf("bridge")>=0||t.indexOf("dead bug")>=0||t.indexOf("figure-four")>=0||t.indexOf("legs-up")>=0||t.indexOf("pelvic")>=0) pose="floor"; else if(t.indexOf("lunge")>=0||t.indexOf("warrior")>=0||t.indexOf("triangle")>=0||t.indexOf("half-split")>=0) pose="lunge"; else if(t.indexOf("squat")>=0||t.indexOf("chair")>=0) pose="squat"; else if(t.indexOf("pigeon")>=0||t.indexOf("frog")>=0||t.indexOf("child")>=0) pose="floor"; else if(t.indexOf("downward")>=0||t.indexOf("puppy")>=0||t.indexOf("cobra")>=0||t.indexOf("sphinx")>=0||t.indexOf("camel")>=0) pose="yoga"; else if(t.indexOf("balance")>=0||t.indexOf("half moon")>=0||t.indexOf("leg swing")>=0||t.indexOf("march")>=0) pose="balance";
-  var body={
-    stand:"<circle cx=\"250\" cy=\"52\" r=\"20\"/><line x1=\"250\" y1=\"72\" x2=\"250\" y2=\"145\"/><line x1=\"250\" y1=\"90\" x2=\"190\" y2=\"120\"/><line x1=\"250\" y1=\"90\" x2=\"310\" y2=\"120\"/><line x1=\"250\" y1=\"145\" x2=\"215\" y2=\"205\"/><line x1=\"250\" y1=\"145\" x2=\"285\" y2=\"205\"/>",
-    squat:"<circle cx=\"250\" cy=\"52\" r=\"20\"/><line x1=\"250\" y1=\"72\" x2=\"250\" y2=\"130\"/><line x1=\"250\" y1=\"90\" x2=\"190\" y2=\"120\"/><line x1=\"250\" y1=\"90\" x2=\"310\" y2=\"120\"/><line x1=\"250\" y1=\"130\" x2=\"205\" y2=\"170\"/><line x1=\"205\" y1=\"170\" x2=\"180\" y2=\"205\"/><line x1=\"250\" y1=\"130\" x2=\"295\" y2=\"170\"/><line x1=\"295\" y1=\"170\" x2=\"325\" y2=\"205\"/>",
-    lunge:"<circle cx=\"250\" cy=\"52\" r=\"20\"/><line x1=\"250\" y1=\"72\" x2=\"245\" y2=\"135\"/><line x1=\"245\" y1=\"92\" x2=\"190\" y2=\"120\"/><line x1=\"245\" y1=\"92\" x2=\"310\" y2=\"60\"/><line x1=\"245\" y1=\"135\" x2=\"205\" y2=\"175\"/><line x1=\"205\" y1=\"175\" x2=\"155\" y2=\"205\"/><line x1=\"245\" y1=\"135\" x2=\"300\" y2=\"165\"/><line x1=\"300\" y1=\"165\" x2=\"350\" y2=\"205\"/>",
-    floor:"<circle cx=\"145\" cy=\"155\" r=\"20\"/><line x1=\"165\" y1=\"160\" x2=\"280\" y2=\"160\"/><line x1=\"215\" y1=\"160\" x2=\"180\" y2=\"205\"/><line x1=\"250\" y1=\"160\" x2=\"300\" y2=\"205\"/><line x1=\"205\" y1=\"160\" x2=\"180\" y2=\"120\"/><line x1=\"250\" y1=\"160\" x2=\"290\" y2=\"120\"/>",
-    plank:"<circle cx=\"145\" cy=\"105\" r=\"20\"/><line x1=\"160\" y1=\"120\" x2=\"310\" y2=\"165\"/><line x1=\"205\" y1=\"135\" x2=\"170\" y2=\"205\"/><line x1=\"250\" y1=\"150\" x2=\"280\" y2=\"205\"/><line x1=\"205\" y1=\"135\" x2=\"160\" y2=\"145\"/><line x1=\"250\" y1=\"150\" x2=\"305\" y2=\"125\"/>",
-    cat:"<circle cx=\"150\" cy=\"132\" r=\"18\"/><line x1=\"168\" y1=\"135\" x2=\"280\" y2=\"125\"/><line x1=\"280\" y1=\"125\" x2=\"365\" y2=\"150\"/><line x1=\"190\" y1=\"135\" x2=\"175\" y2=\"205\"/><line x1=\"275\" y1=\"128\" x2=\"270\" y2=\"205\"/><line x1=\"190\" y1=\"135\" x2=\"145\" y2=\"190\"/><line x1=\"315\" y1=\"140\" x2=\"350\" y2=\"195\"/>",
-    yoga:"<circle cx=\"250\" cy=\"52\" r=\"20\"/><line x1=\"250\" y1=\"72\" x2=\"245\" y2=\"135\"/><line x1=\"245\" y1=\"95\" x2=\"190\" y2=\"120\"/><line x1=\"245\" y1=\"95\" x2=\"315\" y2=\"120\"/><line x1=\"245\" y1=\"135\" x2=\"190\" y2=\"185\"/><line x1=\"190\" y1=\"185\" x2=\"135\" y2=\"185\"/><line x1=\"245\" y1=\"135\" x2=\"315\" y2=\"170\"/><line x1=\"315\" y1=\"170\" x2=\"375\" y2=\"155\"/>",
-    balance:"<circle cx=\"250\" cy=\"52\" r=\"20\"/><line x1=\"250\" y1=\"72\" x2=\"240\" y2=\"145\"/><line x1=\"240\" y1=\"95\" x2=\"180\" y2=\"70\"/><line x1=\"240\" y1=\"95\" x2=\"305\" y2=\"115\"/><line x1=\"240\" y1=\"145\" x2=\"195\" y2=\"195\"/><line x1=\"240\" y1=\"145\" x2=\"330\" y2=\"175\"/><line x1=\"330\" y1=\"175\" x2=\"390\" y2=\"155\"/>"
+const movementImages = [
+  {keys:["cat-cow"], url:"https://assets.clevelandclinic.org/transform/00c3422d-4922-4dc9-950d-50c5c2d90925/yoga-poses-cow-cat-936323648", source:"Cleveland Clinic"},
+  {keys:["90/90 hip"], url:"https://www.fixprogram.com/wp-content/uploads/2026/04/90-90-hip-switch.jpg", source:"Fix Program"},
+  {keys:["deep squat","sumo squat"], url:"https://www.hingehealth.io/wp-content/uploads/2026/04/deep-squat.jpg", source:"Hinge Health"},
+  {keys:["world’s greatest stretch","world's greatest stretch"], url:"https://wpyi.thecwa.org/wp-content/uploads/2025/12/worlds-greatest-stretch.jpg", source:"World's Greatest Stretch"},
+  {keys:["leg swings"], url:"https://storage.googleapis.com/dhcdpcebgkscce/swing-with-exercise.html", source:"Exercise demonstration"},
+  {keys:["half-kneeling hip-flexor"], url:"https://www.functionalmovement.com/Exercises/788/half_kneeling_hip_flexor_stretch", source:"Functional Movement Systems"},
+  {keys:["adductor rock-backs"], url:"https://www.rehabhero.ca/exercise/hip-adductor-rock-back", source:"Rehab Hero"},
+  {keys:["pigeon"], url:"https://www.dmoose.com/cdn/shop/articles/feature-image_3142e062-30b1-4138-b35f-20b913297b86.jpg?v=1774522566", source:"DMoose"},
+  {keys:["seated forward fold"], url:"https://yogatrapezepoint.com/wp-content/uploads/2026/03/seated-forward-fold.jpg", source:"Yoga Trapeze Point"},
+  {keys:["frog stretch"], url:"https://www.shvasa.com/cdn/shop/articles/frog-pose.jpg", source:"Shvasa"},
+  {keys:["single-leg glute bridge"], url:"https://i.beauty321.com/600x/https%3A/il.beauty321.com/gallery/gallery/62586/photo-668675f947e22.jpg", source:"Beauty321"},
+  {keys:["half moon"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/ardha-chandrasana.jpg", source:"Yoga Journal"},
+  {keys:["handstand"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/handstand-adho-mukha-vrksasana.jpg", source:"Yoga Journal"},
+  {keys:["arm circles","arm swings"], url:"https://www.acefitness.org/resources/everyone/blog/6590/arm-circles.jpg", source:"ACE Fitness"},
+  {keys:["scapular push"], url:"https://static.wixstatic.com/media/be54e7_cf311aee120b4e98b4dee008d0c8263a~mv2.jpg/v1/fill/w_500%2Ch_500%2Cal_c%2Cq_80%2Cenc_avif%2Cquality_auto/be54e7_cf311aee120b4e98b4dee008d0c8263a~mv2.jpg", source:"HADL Clinical Bodywork"},
+  {keys:["wall slides"], url:"https://static.wixstatic.com/media/be54e7_db21e7ade7a74a7796e32fad06ed4ced~mv2.jpg/v1/fill/w_980%2Ch_1240%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/be54e7_db21e7ade7a74a7796e32fad06ed4ced~mv2.jpg", source:"HADL Clinical Bodywork"},
+  {keys:["doorway chest"], url:"https://pugjhtmbidiphxvamjik.supabase.co/storage/v1/object/public/program-images/exercise-doorway-chest-stretch.png", source:"Posture Guy"},
+  {keys:["downward dog"], url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg", source:"Body By Yoga"},
+  {keys:["puppy pose"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/uttana-shishosana.jpg", source:"Yoga Journal"},
+  {keys:["cow-face arms"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/gomukhasana.jpg", source:"Yoga Journal"},
+  {keys:["crab touches","crab holds"], url:"https://www.verywellfit.com/thmb/0QeB4d0e2V3k7fGmQ0l3cGQx9Y0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/crab-walk-exercise-56a9c4f45f9b58b7d0f3c6c4.jpg", source:"Verywell Fit"},
+  {keys:["hand walk around"], url:"https://sportsrehab.ucsf.edu/sites/g/files/tkssra10961/files/Scapular%20Stabilization%20Protocol.pdf", source:"UCSF Sports Medicine"},
+  {keys:["dead bug","dead bugs"], url:"https://www.strongerperformancept.com/cdn-cgi/image/width=1200,quality=80,format=auto/on/demandware.static/-/Sites/default/dw6b4e9f4c/dead-bug-exercise.jpg", source:"Stronger Performance PT"},
+  {keys:["sphinx"], url:"https://beyogi.com/wp-content/uploads/CobraPose-Julie.jpg", source:"beYogi"},
+  {keys:["low cobra"], url:"https://beyogi.com/wp-content/uploads/CobraPose-Julie.jpg", source:"beYogi"},
+  {keys:["bridge pose"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/setu-bandha-sarvangasana.jpg", source:"Yoga Journal"},
+  {keys:["supported camel"], url:"https://hips.hearstapps.com/hmg-prod/images/beautiful-woman-standing-in-camel-pose-ustrasana-royalty-free-image-1629873947.jpg?crop=0.99953xw%3A1xh%3Bcenter%2Ctop", source:"ELLE"},
+  {keys:["triangle"], url:"https://davelinabury.com/wp-content/uploads/2025/12/trikonasana.jpg", source:"Iyengar Yoga"},
+  {keys:["warrior ii"], url:"https://cdn.shopify.com/s/files/1/0190/9037/4722/files/6_383d7087-d836-4e9c-9f26-c71c0b24bacb.png?v=1706088433", source:"MIER"},
+  {keys:["child’s pose","child's pose"], url:"https://www.verywellfit.com/thmb/3jVY8oPqW8jJk8a4QeX5jR1VQvA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/childs-pose-balasana-56a9c5d45f9b58b7d0f3c6c4.jpg", source:"Verywell Fit"},
+  {keys:["bird dogs","bird dog"], url:"https://static.wixstatic.com/media/2300ce_e5f20c71cee94a2fb165a6aabf52487e~mv2.png/v1/fill/w_980%2Ch_980%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/2300ce_e5f20c71cee94a2fb165a6aabf52487e~mv2.png", source:"Meta Therapy"},
+  {keys:["legs-up-the-wall"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/viparita-karani.jpg", source:"Yoga Journal"},
+  {keys:["seated spinal","seated rotations"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/ardha-matsyendrasana.jpg", source:"Yoga Journal"},
+  {keys:["half-split"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/ardha-hanumanasana.jpg", source:"Yoga Journal"},
+  {keys:["low lunge"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/anjaneyasana.jpg", source:"Yoga Journal"},
+  {keys:["diaphragmatic breathing"], url:"https://www.yogajournal.com/wp-content/uploads/2021/09/dirga-pranayama.jpg", source:"Yoga Journal"},
+  {keys:["march in place"], url:"https://www.acefitness.org/resources/everyone/blog/6587/marching-in-place.jpg", source:"ACE Fitness"},
+  {keys:["single-leg balance"], url:"https://www.acefitness.org/resources/everyone/blog/6595/single-leg-balance.jpg", source:"ACE Fitness"},
+  {keys:["leg hold"], url:"https://www.acefitness.org/resources/everyone/blog/6595/single-leg-balance.jpg", source:"ACE Fitness"},
+  {keys:["pelvic tilts"], url:"https://www.acefitness.org/resources/everyone/blog/6600/pelvic-tilt.jpg", source:"ACE Fitness"},
+  {keys:["thoracic rotations","open-book","aarem thoracic"], url:"https://www.acefitness.org/resources/everyone/blog/6597/thoracic-rotation.jpg", source:"ACE Fitness"}
+];
+
+function findMovementImage(ex){
+  const t=ex.toLowerCase();
+  return movementImages.find(item=>item.keys.some(k=>t.includes(k))) || {
+    url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg",
+    source:"Google Images result — yoga/mobility demonstration"
   };
-  return "<svg viewBox=\"0 0 500 250\" aria-label=\"Movement preview\"><g fill=\"none\" stroke=\"#f8fafc\" stroke-width=\"10\" stroke-linecap=\"round\" stroke-linejoin=\"round\">"+(body[pose]||body.stand)+"</g><line x1=\"30\" y1=\"205\" x2=\"470\" y2=\"205\" stroke=\"#334155\" stroke-width=\"3\"/><text x=\"250\" y=\"235\" text-anchor=\"middle\" fill=\"#94a3b8\" font-size=\"13\">Movement preview</text></svg>";
+}
+
+function imageVisual(ex){
+  const img=findMovementImage(ex);
+  const googleUrl="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(ex.replace(/—.*$/,"")+" exercise");
+  return '<div><img src="'+img.url+'" alt="'+ex.replace(/"/g,"&quot;")+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.src=\'https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg\'"><a class="movement-source" href="'+googleUrl+'" target="_blank" rel="noopener">View more real images on Google Images →</a></div>';
 }
 function openMovement(event,ex){
   if(event) event.stopPropagation();
@@ -151,7 +193,7 @@ function openMovement(event,ex){
   document.getElementById("movement-title").textContent=ex;
   document.getElementById("movement-description").textContent=info[0];
   document.getElementById("movement-tip").textContent=info[1];
-  document.getElementById("movement-visual").innerHTML=poseSVG(ex);
+  document.getElementById("movement-visual").innerHTML=imageVisual(ex);
   document.getElementById("movement-modal").classList.add("open");
 }
 function closeMovement(){document.getElementById("movement-modal").classList.remove("open");}
