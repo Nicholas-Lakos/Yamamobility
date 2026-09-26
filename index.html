@@ -46,7 +46,7 @@
     .exercise-label { font-size: .9rem; color: var(--text-main); flex-grow: 1; line-height: 1.3; }
     .exercise-item:has(input[type="checkbox"]:checked) { background: var(--active-item-bg); }
     .exercise-item input[type="checkbox"]:checked + .exercise-label { color: var(--text-main); font-weight: 500; }
-    .exercise-item { cursor: pointer; } .movement-icon { margin-left:8px;color:var(--accent-blue);font-size:.75rem;opacity:.8; } .movement-button { margin-left:10px; border:1px solid var(--accent-blue); background:transparent; color:var(--accent-blue); border-radius:7px; padding:6px 9px; font-size:.72rem; font-weight:700; cursor:pointer; flex-shrink:0; touch-action:manipulation; } .movement-button:active { background:var(--accent-blue); color:#0f172a; } .movement-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)} .movement-modal.open{display:flex}.movement-card{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45)} .movement-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 10px}.movement-title{font-size:1.05rem;font-weight:700;line-height:1.25}.movement-close{border:1px solid var(--card-border);background:transparent;color:var(--text-main);width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}.movement-visual{margin:0 18px;min-height:250px;border-radius:12px;background:#0b1220;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;overflow:hidden}.movement-visual img{width:100%;height:300px;object-fit:contain;display:block;background:#0b1220}.movement-source{display:block;margin-top:8px;font-size:.72rem;color:var(--text-muted);text-decoration:none}.movement-source:hover{color:var(--accent-blue)}.movement-details{padding:14px 18px 18px}.movement-details p{color:var(--text-muted);font-size:.88rem;line-height:1.45;margin-bottom:10px}.movement-tip{color:var(--text-main)!important}
+    .exercise-item { cursor: pointer; } .movement-icon { margin-left:8px;color:var(--accent-blue);font-size:.75rem;opacity:.8; } .movement-button { margin-left:10px; border:1px solid var(--accent-blue); background:transparent; color:var(--accent-blue); border-radius:7px; padding:6px 9px; font-size:.72rem; font-weight:700; cursor:pointer; flex-shrink:0; touch-action:manipulation; } .movement-button:active { background:var(--accent-blue); color:#0f172a; } .movement-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)} .movement-modal.open{display:flex}.movement-card{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45)} .movement-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 10px}.movement-title{font-size:1.05rem;font-weight:700;line-height:1.25}.movement-close{border:1px solid var(--card-border);background:transparent;color:var(--text-main);width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}.movement-visual{margin:0 18px;min-height:250px;border-radius:12px;background:#0b1220;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;overflow:hidden}.google-image-panel{width:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;background:#0b1220}.google-image-icon{font-size:3.2rem;font-weight:800;line-height:1;margin-bottom:12px;color:#4285f4}.google-image-heading{font-size:1.1rem;font-weight:700;margin-bottom:8px}.google-image-text{max-width:390px;color:var(--text-muted);font-size:.84rem;line-height:1.45;margin-bottom:18px}.google-image-button{display:inline-block;border:1px solid var(--accent-blue);background:var(--accent-blue);color:#0f172a;border-radius:8px;padding:10px 14px;font-size:.76rem;font-weight:800;text-decoration:none}.movement-details{padding:14px 18px 18px}.movement-details p{color:var(--text-muted);font-size:.88rem;line-height:1.45;margin-bottom:10px}.movement-tip{color:var(--text-main)!important}
     .day-note { padding: 12px 16px; font-size: .8rem; color: #f59e0b; background: #271e11; border-top: 1px solid var(--card-border); font-style: italic; line-height: 1.35; }
   </style>
 </head>
@@ -128,44 +128,12 @@ const movementInfo = {
   "Legs-up-the-wall — 2 min":["Lie on your back with your legs resting against a wall.","Let your breathing slow and keep the position comfortable."],
   "Diaphragmatic breathing — 2 min":["Breathe slowly into the lower ribs and abdomen.","Keep the shoulders relaxed and lengthen the exhale."],
 };
-const movementImages = [
-  {keys:["cat-cow"], url:"https://assets.clevelandclinic.org/transform/00c3422d-4922-4dc9-950d-50c5c2d90925/yoga-poses-cow-cat-936323648", source:"Cleveland Clinic"},
-  {keys:["90/90 hip","hip switch"], url:"https://assets.clevelandclinic.org/transform/00c3422d-4922-4dc9-950d-50c5c2d90925/yoga-poses-cow-cat-936323648", source:"Google Images / exercise demonstration"},
-  {keys:["deep squat","sumo squat","chair pose"], url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg", source:"Google Images / yoga demonstration"},
-  {keys:["world’s greatest stretch","world's greatest stretch","lunge","half-split"], url:"https://pugjhtmbidiphxvamjik.supabase.co/storage/v1/object/public/program-images/exercise-doorway-chest-stretch.png", source:"Google Images / mobility demonstration"},
-  {keys:["pigeon"], url:"https://www.dmoose.com/cdn/shop/articles/feature-image_3142e062-30b1-4138-b35f-20b913297b86.jpg?v=1774522566", source:"DMoose"},
-  {keys:["frog stretch"], url:"https://www.dmoose.com/cdn/shop/articles/feature-image_3142e062-30b1-4138-b35f-20b913297b86.jpg?v=1774522566", source:"Google Images / mobility demonstration"},
-  {keys:["single-leg glute bridge","bridge"], url:"https://i.beauty321.com/600x/https%3A/il.beauty321.com/gallery/gallery/62586/photo-668675f947e22.jpg", source:"Beauty321"},
-  {keys:["half moon","single-leg balance","leg hold"], url:"https://i.beauty321.com/600x/https%3A/il.beauty321.com/gallery/gallery/62586/photo-668675f947e22.jpg", source:"Google Images / balance demonstration"},
-  {keys:["handstand"], url:"https://i.beauty321.com/600x/https%3A/il.beauty321.com/gallery/gallery/62586/photo-668675f947e22.jpg", source:"Google Images / balance demonstration"},
-  {keys:["scapular push"], url:"https://static.wixstatic.com/media/be54e7_cf311aee120b4e98b4dee008d0c8263a~mv2.jpg/v1/fill/w_500%2Ch_500%2Cal_c%2Cq_80%2Cenc_avif%2Cquality_auto/be54e7_cf311aee120b4e98b4dee008d0c8263a~mv2.jpg", source:"HADL Clinical Bodywork"},
-  {keys:["wall slides"], url:"https://static.wixstatic.com/media/be54e7_db21e7ade7a74a7796e32fad06ed4ced~mv2.jpg/v1/fill/w_980%2Ch_1240%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/be54e7_db21e7ade7a74a7796e32fad06ed4ced~mv2.jpg", source:"HADL Clinical Bodywork"},
-  {keys:["doorway chest"], url:"https://pugjhtmbidiphxvamjik.supabase.co/storage/v1/object/public/program-images/exercise-doorway-chest-stretch.png", source:"Posture Guy"},
-  {keys:["downward dog"], url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg", source:"Body By Yoga"},
-  {keys:["puppy pose","cow-face arms"], url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg", source:"Google Images / yoga demonstration"},
-  {keys:["dead bug","dead bugs"], url:"https://i.beauty321.com/600x/https%3A/il.beauty321.com/gallery/gallery/62586/photo-668675f947e22.jpg", source:"Google Images / exercise demonstration"},
-  {keys:["bird dogs","bird dog"], url:"https://static.wixstatic.com/media/2300ce_e5f20c71cee94a2fb165a6aabf52487e~mv2.png/v1/fill/w_980%2Ch_980%2Cal_c%2Cq_90%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/2300ce_e5f20c71cee94a2fb165a6aabf52487e~mv2.png", source:"Meta Therapy"},
-  {keys:["sphinx","low cobra"], url:"https://beyogi.com/wp-content/uploads/CobraPose-Julie.jpg", source:"beYogi"},
-  {keys:["supported camel"], url:"https://hips.hearstapps.com/hmg-prod/images/beautiful-woman-standing-in-camel-pose-ustrasana-royalty-free-image-1629873947.jpg?crop=0.99953xw%3A1xh%3Bcenter%2Ctop", source:"ELLE"},
-  {keys:["triangle"], url:"https://davelinabury.com/wp-content/uploads/2025/12/trikonasana.jpg", source:"Google Images / yoga demonstration"},
-  {keys:["warrior ii"], url:"https://cdn.shopify.com/s/files/1/0190/9037/4722/files/6_383d7087-d836-4e9c-9f26-c71c0b24bacb.png?v=1706088433", source:"MIER"},
-  {keys:["child’s pose","child's pose"], url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg", source:"Google Images / yoga demonstration"},
-  {keys:["legs-up-the-wall"], url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg", source:"Google Images / yoga demonstration"},
-  {keys:["seated forward fold"], url:"https://i.beauty321.com/600x/https%3A/il.beauty321.com/gallery/gallery/62586/photo-668675f947e22.jpg", source:"Google Images / flexibility demonstration"}
-];
-
-function findMovementImage(ex){
-  const t=ex.toLowerCase();
-  return movementImages.find(item=>item.keys.some(k=>t.includes(k))) || {
-    url:"https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg",
-    source:"Google Images result — yoga/mobility demonstration"
-  };
+function googleImagesUrl(ex){
+  return "https://www.google.com/search?tbm=isch&q="+encodeURIComponent(ex.replace(/—.*$/,"")+" exercise demonstration");
 }
-
 function imageVisual(ex){
-  const img=findMovementImage(ex);
-  const googleUrl="https://www.google.com/search?tbm=isch&q="+encodeURIComponent(ex.replace(/—.*$/,"")+" exercise");
-  return '<div><img src="'+img.url+'" alt="'+ex.replace(/"/g,"&quot;")+'" loading="lazy" referrerpolicy="no-referrer" onerror="this.src=\'https://bodybyyoga.training/wp-content/uploads/2021/10/Downward-Dog-Pose-2048x1366.jpg\'"><a class="movement-source" href="'+googleUrl+'" target="_blank" rel="noopener">View more real images on Google Images →</a></div>';
+  const url=googleImagesUrl(ex);
+  return '<div class="google-image-panel"><div class="google-image-icon">G</div><div class="google-image-heading">Find the exact movement</div><div class="google-image-text">Google Images will show photos and demonstrations specifically for <strong>'+ex.replace(/"/g,"&quot;")+'</strong>.</div><a class="google-image-button" href="'+url+'" target="_blank" rel="noopener noreferrer">OPEN GOOGLE IMAGES →</a></div>';
 }
 function openMovement(event,ex){
   if(event) event.stopPropagation();
