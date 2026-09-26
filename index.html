@@ -97,13 +97,13 @@ function renderApp(){
       sectionsHTML+=`<div class="section-title">${section.name}</div>`;
       section.exercises.forEach((ex,eIdx)=>{
         const exId=`d${dayData.day}_s${sIdx}_e${eIdx}`;
-        const safeEx=ex.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); sectionsHTML+=`<label class="exercise-item" for="${exId}" data-ex="${safeEx}"><input type="checkbox" id="${exId}" onchange="onExerciseToggle(${dayData.day})"><span class="exercise-label">${ex}</span><button type="button" class="movement-button" aria-label="Show ${safeEx} movement" onclick="openMovement(event, this.closest('.exercise-item').dataset.ex)">VIEW</button></label>`;
+        const safeEx=ex.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;"); sectionsHTML+=`<label class="exercise-item" for="${exId}" data-ex="${safeEx}"><input type="checkbox" id="${exId}" onchange="onExerciseToggle(${dayData.day})"><span class="exercise-label">${ex}</span></label>`;
       });
     });
     const noteHTML=dayData.note?`<div class="day-note">${dayData.note}</div>`:'';
     dayEl.innerHTML=`<div class="day-header"><div class="day-title-container" onclick="toggleDay(${dayData.day})"><input type="checkbox" id="day-cb-${dayData.day}" onchange="toggleDayAll(event,${dayData.day})" onclick="event.stopPropagation()"><span class="day-title">${dayData.title}</span></div><div class="day-meta" onclick="toggleDay(${dayData.day})"><span class="day-counter" id="counter-day-${dayData.day}">0/${dayTotal}</span><span class="arrow">▼</span></div></div><div class="day-description">${dayData.description}</div><div class="day-content">${sectionsHTML}${noteHTML}</div>`;
     container.appendChild(dayEl);
-    dayEl.querySelectorAll(".exercise-item").forEach(item=>item.addEventListener("click", function(event){ if(event.target.tagName === "INPUT" || event.target.tagName === "BUTTON") return; openMovement(event, this.dataset.ex); }));
+    dayEl.querySelectorAll(".exercise-item").forEach(item=>item.addEventListener("click", function(event){ if(event.target.tagName === "INPUT") return; openMovement(event, this.dataset.ex); }));
   });
   loadSavedState(); updateProgress();
 }
@@ -128,12 +128,16 @@ const movementInfo = {
   "Legs-up-the-wall — 2 min":["Lie on your back with your legs resting against a wall.","Let your breathing slow and keep the position comfortable."],
   "Diaphragmatic breathing — 2 min":["Breathe slowly into the lower ribs and abdomen.","Keep the shoulders relaxed and lengthen the exhale."],
 };
-function googleImagesUrl(ex){
-  return "https://www.google.com/search?tbm=isch&q="+encodeURIComponent(ex.replace(/—.*$/,"")+" exercise demonstration");
-}
+const movementImages = {
+  "Cat-cow — 10 reps":"assets/cat-cow.jpg",
+  "Cat-cow — 8 reps":"assets/cat-cow.jpg",
+  "Leg swings, front to back — 10 per leg":"assets/leg-swings.jpg",
+  "Leg swings — 10 per leg":"assets/leg-swings.jpg"
+};
 function imageVisual(ex){
-  const url=googleImagesUrl(ex);
-  return '<div class="google-image-panel"><div class="google-image-icon">G</div><div class="google-image-heading">Find the exact movement</div><div class="google-image-text">Google Images will show photos and demonstrations specifically for <strong>'+ex.replace(/"/g,"&quot;")+'</strong>.</div><a class="google-image-button" href="'+url+'" target="_blank" rel="noopener noreferrer">OPEN GOOGLE IMAGES →</a></div>';
+  const src=movementImages[ex];
+  if(src) return '<img src="'+src+'" alt="'+ex.replace(/"/g,"&quot;")+'" loading="lazy" style="width:100%;height:auto;max-height:520px;object-fit:contain;display:block;background:#fff">';
+  return '<div class="google-image-panel"><div class="google-image-heading">Exercise image coming soon</div><div class="google-image-text">Send an image for <strong>'+ex.replace(/"/g,"&quot;")+'</strong> and it can be added here.</div></div>';
 }
 function openMovement(event,ex){
   if(event) event.stopPropagation();
