@@ -11,7 +11,7 @@ function addYamaTimers(){
   const matches=[...txt.matchAll(/(\d+)\s*(sec|seconds|min|mins|minute|minutes)/ig)];
   if(!matches.length)return;
   const m=matches[matches.length-1],sec=Number(m[1])*(m[2].toLowerCase().startsWith("min")?60:1);
-  const b=document.createElement("button");b.type="button";b.className="yama-timer-btn";b.textContent="⏱ "+(sec>=60?Math.round(sec/60)+"m":sec+"s");b.setAttribute("aria-label","Start "+sec+" second timer");
+  const b=document.createElement("button");b.type="button";b.className="yama-timer-btn";b.textContent=(sec>=60?Math.round(sec/60)+"m":sec+"s");b.setAttribute("aria-label","Start "+sec+" second timer");
   b.addEventListener("click",ev=>{ev.preventDefault();ev.stopPropagation();Yama.timer(sec,(row.querySelector(".exercise-name")||row).textContent.trim())});
   row.appendChild(b);
  });
