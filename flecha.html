@@ -6,7 +6,8 @@ const exerciseVideos={
 "Abbreviated / Rocker Throws":"assets/Abbreviated Rocker.mov",
 "Full Standing Distance Throws":"assets/Full Throw:Crow Hop.MOV",
 "Crow-Hop Max Velocity Throws":"assets/Full Throw:Crow Hop.MOV",
-"Rocker Throws":"assets/Rocker Throw.mov"
+"Rocker Throws":"assets/Rocker Throw.mov",
+"Baseball-to-Flecha Mapping":"assets/JavMap.MOV"
 };
 function openVideo(name){const src=exerciseVideos[name];if(!src)return;document.getElementById("video-title").textContent=name;const v=document.getElementById("demo-video");v.src=src+"?v=20260927-clips";v.muted=true;v.volume=0;document.getElementById("video-modal").classList.add("open");v.play().catch(()=>{})}
 function closeVideo(){const v=document.getElementById("demo-video");v.pause();v.removeAttribute("src");v.load();document.getElementById("video-modal").classList.remove("open")}
