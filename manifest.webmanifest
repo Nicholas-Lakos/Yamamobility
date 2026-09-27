@@ -1,0 +1,16 @@
+{
+  "name": "Yamamobility",
+  "short_name": "Yamamobility",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#030914",
+  "theme_color": "#030914",
+  "icons": [
+    {
+      "src": "assets/App%20Photo%201.jpeg",
+      "sizes": "180x180",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ]
+}
