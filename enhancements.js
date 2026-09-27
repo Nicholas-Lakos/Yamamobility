@@ -7,7 +7,7 @@ timer(sec,name,anchor){clearInterval(window._yt);let total=sec,left=sec,running=
 function addYamaTimers(){
  document.querySelectorAll(".exercise-item").forEach(row=>{
   if(row.querySelector(".yama-timer-btn"))return;
-  const txt=row.textContent||"";
+  const txt=((row.querySelector(".exercise-prescription")||row).textContent)||"";
   const matches=[...txt.matchAll(/(\d+)\s*(sec|seconds|min|mins|minute|minutes)/ig)];
   if(!matches.length)return;
   const m=matches[matches.length-1],sec=Number(m[1])*(m[2].toLowerCase().startsWith("min")?60:1);
