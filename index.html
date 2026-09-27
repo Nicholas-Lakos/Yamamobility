@@ -48,7 +48,7 @@
     .exercise-prescription { font-size:.78rem; color:var(--text-muted); font-weight:400; }
     .exercise-item:has(input[type="checkbox"]:checked) { background: var(--active-item-bg); }
     .exercise-item input[type="checkbox"]:checked + .exercise-label { color: var(--text-main); font-weight: 500; }
-    .exercise-item { cursor: pointer; } .movement-icon { margin-left:8px;color:var(--accent-blue);font-size:.75rem;opacity:.8; } .movement-button { margin-left:10px; border:1px solid var(--accent-blue); background:transparent; color:var(--accent-blue); border-radius:7px; padding:6px 9px; font-size:.72rem; font-weight:700; cursor:pointer; flex-shrink:0; touch-action:manipulation; } .movement-button:active { background:var(--accent-blue); color:#0f172a; } .movement-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)} .movement-modal.open{display:flex}.movement-card{width:100%;max-width:520px;max-height:90vh;overflow:auto;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45)} .movement-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 10px}.movement-title{font-size:1.05rem;font-weight:700;line-height:1.25}.movement-close{border:1px solid var(--card-border);background:transparent;color:var(--text-main);width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}.movement-visual{margin:0 18px;min-height:250px;border-radius:12px;background:#0b1220;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;overflow:hidden}.google-image-panel{width:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;background:#0b1220}.google-image-icon{font-size:3.2rem;font-weight:800;line-height:1;margin-bottom:12px;color:#4285f4}.google-image-heading{font-size:1.1rem;font-weight:700;margin-bottom:8px}.google-image-text{max-width:390px;color:var(--text-muted);font-size:.84rem;line-height:1.45;margin-bottom:18px}.google-image-button{display:inline-block;border:1px solid var(--accent-blue);background:var(--accent-blue);color:#0f172a;border-radius:8px;padding:10px 14px;font-size:.76rem;font-weight:800;text-decoration:none}.movement-details{padding:14px 18px 18px}.movement-details p{color:var(--text-muted);font-size:.88rem;line-height:1.45;margin-bottom:10px}.movement-tip{color:var(--text-main)!important}
+    .exercise-item { cursor: pointer; } .movement-icon { margin-left:8px;color:var(--accent-blue);font-size:.75rem;opacity:.8; } .movement-button { margin-left:10px; border:1px solid var(--accent-blue); background:transparent; color:var(--accent-blue); border-radius:7px; padding:6px 9px; font-size:.72rem; font-weight:700; cursor:pointer; flex-shrink:0; touch-action:manipulation; } .movement-button:active { background:var(--accent-blue); color:#0f172a; } .movement-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:10px;background:rgba(0,0,0,.72);backdrop-filter:blur(4px)} .movement-modal.open{display:flex}.movement-card{width:100%;max-width:620px;height:auto;max-height:96dvh;overflow:auto;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,.45)} .movement-head{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:16px 18px 10px}.movement-title{font-size:1.05rem;font-weight:700;line-height:1.25}.movement-close{border:1px solid var(--card-border);background:transparent;color:var(--text-main);width:34px;height:34px;border-radius:50%;font-size:1.2rem;cursor:pointer}.movement-visual{margin:0 12px;min-height:0;max-height:70dvh;border-radius:12px;background:#0b1220;border:1px solid var(--card-border);display:flex;align-items:center;justify-content:center;overflow:hidden}.google-image-panel{width:100%;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;background:#0b1220}.google-image-icon{font-size:3.2rem;font-weight:800;line-height:1;margin-bottom:12px;color:#4285f4}.google-image-heading{font-size:1.1rem;font-weight:700;margin-bottom:8px}.google-image-text{max-width:390px;color:var(--text-muted);font-size:.84rem;line-height:1.45;margin-bottom:18px}.google-image-button{display:inline-block;border:1px solid var(--accent-blue);background:var(--accent-blue);color:#0f172a;border-radius:8px;padding:10px 14px;font-size:.76rem;font-weight:800;text-decoration:none}.movement-details{padding:14px 18px 18px}.movement-details p{color:var(--text-muted);font-size:.88rem;line-height:1.45;margin-bottom:10px}.movement-tip{color:var(--text-main)!important}
     .day-note { padding: 12px 16px; font-size: .8rem; color: #f59e0b; background: #271e11; border-top: 1px solid var(--card-border); font-style: italic; line-height: 1.35; }
   </style>
 </head>
@@ -161,7 +161,7 @@ function googleImagesUrl(ex){
 }
 function imageVisual(ex){
   const src=movementImages[ex];
-  if(src) return '<img src="'+src+'" alt="'+ex.replace(/"/g,"&quot;")+'" loading="eager" style="display:block;width:auto;max-width:100%;height:auto;max-height:min(72vh,680px);object-fit:contain;object-position:center;margin:0 auto;background:#fff">';
+  if(src) return '<img src="'+src+'" alt="'+ex.replace(/"/g,"&quot;")+'" loading="eager" style="display:block;width:100%;height:auto;max-width:100%;max-height:62dvh;object-fit:contain;object-position:center;margin:0 auto;background:#fff">';
   return '<div class="google-image-panel"><div class="google-image-heading">View exercise examples</div><div class="google-image-text">Open Google Images for <strong>'+ex.replace(/"/g,"&quot;")+'</strong>.</div><a class="google-image-button" href="'+googleImagesUrl(ex)+'" target="_blank" rel="noopener noreferrer">OPEN GOOGLE IMAGES →</a></div>';
 }
 function openMovement(event,ex){
@@ -174,10 +174,22 @@ function openMovement(event,ex){
   document.getElementById("movement-tip").textContent=info[1];
   document.getElementById("movement-visual").innerHTML=imageVisual(ex);
   document.getElementById("movement-modal").classList.add("open");
+  requestAnimationFrame(fitMovementImage);
 }
 function closeMovement(){document.getElementById("movement-modal").classList.remove("open");}
+function fitMovementImage(){
+  const img=document.querySelector("#movement-visual img");
+  const card=document.querySelector(".movement-card");
+  const head=document.querySelector(".movement-head");
+  const details=document.querySelector(".movement-details");
+  if(!img||!card)return;
+  const vh=window.innerHeight;
+  const reserved=(head?head.offsetHeight:60)+(details?details.offsetHeight:110)+44;
+  img.style.maxHeight=Math.max(180,vh-reserved-24)+"px";
+}
 document.getElementById("movement-modal").addEventListener("click",closeMovement);
 document.addEventListener("keydown",function(e){if(e.key==="Escape")closeMovement();});
+window.addEventListener("resize",fitMovementImage);
 
 function toggleDay(dayNum){document.getElementById(`day-card-${dayNum}`).classList.toggle('active');}
 function toggleDayAll(event,dayNum){
