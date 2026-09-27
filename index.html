@@ -23,9 +23,9 @@
 .javelin-link{position:absolute;left:12.8%;top:45.3%;width:clamp(145px,17vw,260px);transform:translate(-10%,-90%) rotate(-8deg);transform-origin:10% 90%;z-index:6;transition:.2s}.javelin-link:hover{transform:translate(-10%,-90%) rotate(-8deg) scale(1.06)}.javelin-link img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 12px rgba(22,135,255,.8))}
 @media(max-width:700px){.javelin-link{left:84%;top:5.7%;bottom:auto;width:clamp(72px,19vw,110px);transform:translate(-50%,-50%) rotate(45deg);transform-origin:center}.javelin-link:hover{transform:translate(-50%,-50%) rotate(45deg) scale(1.06)}}
 </style>
-</head>
+<link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="enhancements.css"><style>.dash-link{position:absolute;right:2.5%;bottom:2.5%;z-index:8;color:#fff;text-decoration:none;background:#071b37dd;border:1px solid #1687ff;border-radius:999px;padding:10px 15px;font-size:clamp(.65rem,1.1vw,.9rem);font-weight:800;box-shadow:0 0 12px #1687ff66}.mode-chip{position:absolute;right:2.5%;top:2.5%;z-index:8;color:#38bdf8;background:#071b37dd;border:1px solid #1687ff;border-radius:999px;padding:8px 12px;font-size:clamp(.6rem,1vw,.82rem);font-weight:800}.splash{position:fixed;inset:0;z-index:9999;background:#030914;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-style:italic;font-size:clamp(2rem,8vw,5rem);letter-spacing:-.05em;animation:splashOut .45s ease 1.05s forwards}.splash small{font-size:.2em;letter-spacing:.15em;margin-top:8px;font-style:normal}@keyframes splashOut{to{opacity:0;visibility:hidden}}@media(max-width:700px){.dash-link{right:3%;bottom:2%;padding:8px 11px}.mode-chip{top:12%;right:3%}}</style></head>
 <body>
-<main class="home">
+<div class="splash" id="splash">YAMAMOBILITY<small>MOVE LIKE MOTO</small></div><main class="home">
   <section class="hero" aria-label="Yamamobility home">
     <div class="brand">YAMAMOBILITY</div>
     <div class="tag">MOVE LIKE MOTO</div>
@@ -34,7 +34,7 @@
     <a class="day d3" href="day3.html">DAY 3</a>
     <a class="day d4" href="day4.html">DAY 4</a>
     <a class="javelin-link" href="flecha.html" aria-label="Open Flecha throwing program"><img src="assets/Javelin.png?v=flecha-20260927" alt="Flecha javelin"></a>
-  </section>
+  <a class="dash-link" href="dashboard.html">TRAINING DASHBOARD</a><div class="mode-chip" id="home-mode">RECOVERY MODE</div></section>
 </main>
-</body>
+<script src="enhancements.js"></script><script>document.getElementById("home-mode").textContent=(localStorage.getItem("yama_mode")||"Recovery").toUpperCase()+" MODE";if(sessionStorage.getItem("yama_splashed"))document.getElementById("splash").style.display="none";else sessionStorage.setItem("yama_splashed","1")</script></body>
 </html>
