@@ -30,5 +30,5 @@ $("mobilityDone").onchange=()=>saveCompletion("mobility",$("mobilityDone").check
 $("saveReady").onclick=()=>{if(!selected)return;const d=data(),old=d[selected]||{};d[selected]={...old,readiness:{arm:Number($("arm").value),body:Number($("body").value),energy:Number($("energy").value),soreness:Number($("soreness").value),recovery:$("recovery").value.trim(),sleep:$("sleep").value.trim(),sleepTime:$("sleepTime").value.trim()}};put(d);openDay(selected);render()};
 $("save").onclick=()=>{if(!selected)return;const d=data(),old=d[selected]||{};d[selected]={...old,type:$("type").value,intensity:$("intensity").value.trim(),notes:$("notes").value.trim()};put(d);throwBaseline=JSON.stringify({type:$("type").value,intensity:$("intensity").value,notes:$("notes").value});$("editor").classList.remove("open");render()};
 $("del").onclick=()=>{if(!selected)return;const d=data();delete d[selected];put(d);$("editor").classList.remove("open");render()};
-render();
+render();const today=new Date(),todayKey=key(today.getFullYear(),today.getMonth(),today.getDate());openDay(todayKey);
 </script></body></html>
